@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StockWise</title>
+
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<style>
+body {
+    background: linear-gradient(135deg, #f0f4ff, #ffffff);
+    font-family: 'Segoe UI', sans-serif;
+}
+.card-container {
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    padding: 2rem;
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+}
+.form-image {
+    width: 120px;
+    height: auto;
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+    margin-bottom: 1rem;
+}
+.btn-custom {
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+}
+</style>
+</head>
+<body class="container py-5">
+
+<div class="card-container">
+
+    <!-- Bienvenida -->
+    <div class="d-flex align-items-center gap-3 mb-4">
+        <img src="{% static 'contacts/buho.png' %}" alt="Logo StockWise" style="width:60px;height:auto;">
+         <h3 class="mb-0 fw-bold text-primary">Eliminar Producto</h3>
+    </div>
+
+    {% if contact.avatar %}
+    <img src="{{ contact.avatar.url }}" alt="Imagen producto" class="form-image">
+    {% endif %}
+
+    <p class="text-danger mb-4">
+        ¿Estás seguro de eliminar el producto <span class="fw-bold">{{ contact.product }} (Código: {{ contact.code }})</span>?
+    </p>
+
+    <form method="post" class="d-flex justify-content-between">
+        {% csrf_token %}
+        <a href="{% url 'contact_list' %}" class="btn btn-light btn-custom">Cancelar</a>
+        <button class="btn btn-danger btn-custom">Sí, eliminar</button>
+    </form>
+
+</div>
+
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
